@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       title: 'Simple Journal',
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData.dark(),
@@ -32,15 +33,18 @@ class MyApp extends StatelessWidget {
       routes: {
         "home": (context) => const HomeScreen(),
       },
-      onGenerateRoute: (routeSettings){
-        if(routeSettings.name == "add-journal"){
-          final  journal = routeSettings.arguments as Journal;
-          return MaterialPageRoute(builder: (context){
-            return AddJournalScreen(journal: journal);
-          });
+      onGenerateRoute: (routeSettings) {
+        if (routeSettings.name == "add-journal") {
+          final journal = routeSettings.arguments as Journal;
+          return MaterialPageRoute(
+            builder: (context) {
+              return AddJournalScreen(journal: journal);
+            },
+          );
         }
         return null;
       },
     );
   }
 }
+

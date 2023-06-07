@@ -3,12 +3,11 @@ import 'package:flutter_webapi_first_course/helpers/weekday.dart';
 import 'package:flutter_webapi_first_course/models/journal.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../add_journal_screen/add_journal_screen.dart';
-
 class JournalCard extends StatelessWidget {
   final Journal? journal;
   final DateTime showedDate;
-  final Function() refreshFunction;
+  final Function refreshFunction;
+
   const JournalCard({
     Key? key,
     this.journal,
@@ -88,7 +87,7 @@ class JournalCard extends StatelessWidget {
     } else {
       return InkWell(
         onTap: () {
-          callAddJournalScreen(context);
+          callAddJournalScreen(context);     // callAddJournalScreen(context);
         },
         child: Container(
           height: 115,
@@ -103,33 +102,22 @@ class JournalCard extends StatelessWidget {
     }
   }
 
-
-    callAddJournalScreen(BuildContext context) {
-      Navigator.pushNamed(
-        context,
-        'add-journal',
-        arguments: Journal(
-          id: const Uuid().v1(),
-          content: "",
-          createdAt: showedDate,
-          updatedAt: showedDate,
-        ),
-      ).then((value) {
-        refreshFunction();
-
-        if (value == DisposeStatus.success) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Registro salvo com sucesso."),
-            ),
-          );
-        } else if (value == DisposeStatus.error) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Houve uma falha ao registar."),
-            ),
-          );
-        }
-      });
-    }
+  callAddJournalScreen( context) {
+    Navigator.pushNamed(
+      context,
+      "add-journal",
+      arguments: Journal(
+        id: const Uuid().v1(),
+        content: "content",
+        createdAt: showedDate,
+        updatedAt: showedDate,
+      ),
+    ).then((value) {
+      if (value != null && value == true) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Registro bem sucedido!"),
+        ));
+      }
+    });
   }
+}

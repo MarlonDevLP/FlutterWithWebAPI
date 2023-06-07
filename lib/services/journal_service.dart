@@ -11,17 +11,17 @@ class JournalService {
   http.Client client =
       InterceptedClient.build(interceptors: [LoggingInterceptor()]);
 
-  String getURL() {
+  String getUrl() {
     return "$url$resource";
   }
 
   Uri getURI() {
-    return Uri.parse(getURL());
+    return Uri.parse(getUrl());
   }
 
   Future<bool> register(Journal journal) async {
     String jsonJournal = json.encode(journal.toMap());
-    http.Response response = await client.post(Uri.parse(getURL()),
+    http.Response response = await client.post(Uri.parse(getUrl()),
         headers: {'Content-type': 'application/json'}, body: jsonJournal);
     if (response.statusCode == 201) {
       return true;
@@ -30,16 +30,16 @@ class JournalService {
   }
 
   Future<List<Journal>> getAll() async {
-    http.Response response = await client.get(Uri.parse(getURL()));
+    http.Response response = await client.get(Uri.parse(getUrl()));
     if(response.statusCode != 200 ){
       throw Exception();
     }
-    List<Journal> result = [];
+    List<Journal> list = [];
 
-    List<dynamic> jsonList = json.decode(response.body);
-    for(var jsonMap in jsonList){
-       result.add(Journal.fromMap(jsonMap));
+    List<dynamic> jsonDynamic = json.decode(response.body);
+    for(var jsonMap in jsonDynamic){
+       list.add(Journal.fromMap(jsonMap));
     }
-    return result;
+    return list;
   }
 }

@@ -21,7 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Map<String, Journal> database = {};
 
   final ScrollController _listScrollController = ScrollController();
-  final JournalService _journalService = JournalService();
+
+  final JournalService service = JournalService();
 
   @override
   void initState() {
@@ -32,9 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey,
       appBar: AppBar(
+        backgroundColor: Colors.black54,
         // Título basado no dia atual
         title: Text(
+          style: const TextStyle(fontSize: 16),
           "${currentDay.day}  |  ${currentDay.month}  |  ${currentDay.year}",
         ),
         actions: [
@@ -61,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void refresh() async {
-    List<Journal> listJournal = await _journalService.getAll();
+    List<Journal> listJournal = await service.getAll();
 
     setState(() {
       database = {};

@@ -13,6 +13,15 @@ class Journal {
     required this.updatedAt,
   });
 
+  Map<String, dynamic> toMap(){
+    return{
+      "id": id,
+      "content":content,
+      "crested_at": createdAt.toString(),
+      "update_at": updatedAt.toString(),
+    };
+  }
+
   Journal.empty()
       : id = const Uuid().v1(),
         content = "",
@@ -25,25 +34,8 @@ class Journal {
         createdAt = DateTime.parse(map["created_at"]),
         updatedAt = DateTime.parse(map["update_up"],);
 
-        Map<String, dynamic > toMap() {
-        return {
-        "id": id,
-        "content": content,
-        "created_at": createdAt.toString(),
-        "update_at": updatedAt.toString(),
-        };
-        }
-
-            @override
-            String toString() {
+  @override
+  String toString() {
     return "$content \ncreated_at: $createdAt\nupdated_at:$updatedAt";
-  }
-  Map<String, dynamic> tomap() {
-    return {
-      'id': id,
-      'content': content,
-      'created_at': createdAt.toString(),
-      'updated_at': updatedAt.toString()
-    };
   }
 }

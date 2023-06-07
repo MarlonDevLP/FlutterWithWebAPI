@@ -5,7 +5,7 @@ List<JournalCard> generateListJournalCards(
     {required int windowPage,
       required DateTime currentDay,
       required Map<String, Journal> database,
-      required Function() refreshFunction}) {
+      required Function refreshFunction}) {
   // Cria uma lista de Cards vazios
   List<JournalCard> list = List.generate(
     windowPage + 1,
