@@ -3,32 +3,33 @@ import 'package:flutter_webapi_first_course/helpers/weekday.dart';
 import 'package:flutter_webapi_first_course/services/journal_service.dart';
 import '../../models/journal.dart';
 
-class AddJournalScreen extends StatelessWidget {
+class AddJournalScreen extends StatefulWidget {
   final Journal journal;
-  final TextEditingController _contentController = TextEditingController();
+  const AddJournalScreen({Key? key, required this.journal}) : super(key: key);
 
-  AddJournalScreen({Key? key, required this.journal}) : super(key: key);
-  JournarlService service = JournarlService();
+  @override
+  State<AddJournalScreen> createState() => _AddJournalScreenState();
+}
+
+class _AddJournalScreenState extends State<AddJournalScreen> {
+  TextEditingController contentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey,
-      appBar: AppBar(
-        title: Text(
-            "${WeekDay(journal.createdAt.weekday).long} / ${journal.createdAt
-                .day} / ${journal.createdAt.month} / ${journal.createdAt.year}",
-            style: const TextStyle(fontSize: 16)),
-        actions: [IconButton(onPressed: () {
-          registerJournal(context);
-        }, icon: const Icon(Icons.check))
+        appBar: AppBar(
+          title: Text(WeekDay(widget.journal.createdAt).toString()),
+        //style: const TextStyle(fontSize: 16)),
+          actions: [IconButton(onPressed: () {
+            registerJournal(context);
+        },    icon: const Icon(Icons.check))
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(9.0),
         child: TextField(
-          controller: _contentController,
-          autofocus: true,
+          controller: contentController,
           keyboardType: TextInputType.multiline,
           style: const TextStyle(fontSize: 22, color: Colors.black,
           ),
@@ -44,21 +45,15 @@ class AddJournalScreen extends StatelessWidget {
 
   registerJournal(BuildContext context) async {
     JournarlService journalService = JournarlService();
-
-    journal.content = _contentController.text;
-    journalService.register(journal).then((value) {
-      Navigator.pop(context, value);
-    });
-
+    widget.journal.content = contentController.text;
+    journalService.register(widget.journal).then((value){
+      if (value) {
+      Navigator.pop(context, DisposeStatus.success);
+    } else {
+      Navigator.pop(context, DisposeStatus.error);
+    }
+  });
   }
 }
 
-// registerJournal(BuildContext context) {
-//   String content = _contentController.text,
-//       journal;content = content;
-//
-//   JournarlService service = JournarlService();
-//   service.register(journal).then((value) {
-//     Navigator.pop(context, value);
-//   });
-// }
+enum DisposeStatus { exit, error, success }

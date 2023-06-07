@@ -2,13 +2,12 @@
 
 /// Gera dia da semana em português
 class WeekDay {
-  int weekday;
+  DateTime date;
   late String short;
   late String long;
 
-
-  WeekDay(this.weekday) {
-    switch (weekday) {
+  WeekDay(this.date) {
+    switch (date.weekday) {
       case 7:
         short = "dom";
         long = "Domingo";
@@ -37,7 +36,11 @@ class WeekDay {
         short = "sab";
         long = "Sábado";
         break;
-
     }
+  }
+
+  @override
+  String toString() {
+    return "${long.toLowerCase()}, ${date.day} do ${date.month} de ${date.year},";
   }
 }

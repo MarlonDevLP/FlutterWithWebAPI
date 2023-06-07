@@ -6,7 +6,7 @@ import 'package:uuid/uuid.dart';
 class JournalCard extends StatelessWidget {
   final Journal? journal;
   final DateTime showedDate;
-  const JournalCard({Key? key, this.journal, required this.showedDate})
+  const JournalCard({Key? key, this.journal, required this.showedDate, required Function() refreshFunction})
       : super(key: key);
 
   @override
@@ -57,7 +57,7 @@ class JournalCard extends StatelessWidget {
                       ),
                     ),
                     padding: const EdgeInsets.all(8),
-                    child: Text(WeekDay(journal!.createdAt.weekday).short),
+                    child: Text(WeekDay(journal!.createdAt).short),
                   ),
                 ],
               ),
@@ -114,7 +114,7 @@ class JournalCard extends StatelessWidget {
           height: 115,
           alignment: Alignment.center,
           child: Text(
-            "${WeekDay(showedDate.weekday).short} - ${showedDate.day}",
+            "${WeekDay(showedDate).short} - ${showedDate.day}",
             style: const TextStyle(fontSize: 16),
             textAlign: TextAlign.center,
           ),
