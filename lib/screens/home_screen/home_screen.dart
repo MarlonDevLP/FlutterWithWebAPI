@@ -21,8 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Map<String, Journal> database = {};
 
   final ScrollController _listScrollController = ScrollController();
-  final JournarlService _journalService = JournarlService();
-
+  final JournalService _journalService = JournalService();
 
   @override
   void initState() {
@@ -33,19 +32,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
       appBar: AppBar(
-        actions: [IconButton(onPressed: (){
-          refresh();
-        }, icon: const Icon(Icons.refresh, color: Colors.green,))],
-        backgroundColor: Colors.black54,
         // Título basado no dia atual
-        centerTitle: true,
         title: Text(
-            style: const TextStyle(fontSize: 17),
-            "${currentDay.day} / ${currentDay.month} / ${currentDay.year}"),
+          "${currentDay.day}  |  ${currentDay.month}  |  ${currentDay.year}",
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              refresh();
+            },
+            icon: const Icon(
+              Icons.refresh,
+            ),
+          ),
+        ],
       ),
-
       body: ListView(
         controller: _listScrollController,
         children: generateListJournalCards(
@@ -60,11 +62,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void refresh() async {
     List<Journal> listJournal = await _journalService.getAll();
+
     setState(() {
       database = {};
       for (Journal journal in listJournal) {
         database[journal.id] = journal;
       }
+
       if (_listScrollController.hasClients) {
         final double position = _listScrollController.position.maxScrollExtent;
         _listScrollController.jumpTo(position);

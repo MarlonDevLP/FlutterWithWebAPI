@@ -19,11 +19,13 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
     return Scaffold(
       backgroundColor: Colors.grey,
         appBar: AppBar(
-          title: Text(WeekDay(widget.journal.createdAt).toString()),
-        //style: const TextStyle(fontSize: 16)),
+          backgroundColor: Colors.black54,
+          title: Text(WeekDay(widget.journal.createdAt).toString(),style: const TextStyle(fontSize: 16),),
           actions: [IconButton(onPressed: () {
             registerJournal(context);
-        },    icon: const Icon(Icons.check))
+        },    icon: const Icon(Icons.check),
+          )
+
         ],
       ),
       body: Padding(
@@ -44,7 +46,7 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
   }
 
   registerJournal(BuildContext context) async {
-    JournarlService journalService = JournarlService();
+    JournalService journalService = JournalService();
     widget.journal.content = contentController.text;
     journalService.register(widget.journal).then((value){
       if (value) {

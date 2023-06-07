@@ -8,7 +8,7 @@ import '../../add_journal_screen/add_journal_screen.dart';
 class JournalCard extends StatelessWidget {
   final Journal? journal;
   final DateTime showedDate;
-  final Function refreshFunction;
+  final Function() refreshFunction;
   const JournalCard({
     Key? key,
     this.journal,
@@ -20,9 +20,7 @@ class JournalCard extends StatelessWidget {
   Widget build(BuildContext context) {
     if (journal != null) {
       return InkWell(
-        onTap: () {
-          //TODO: Implementar edição da entrada
-        },
+        onTap: () {},
         child: Container(
           height: 115,
           margin: const EdgeInsets.all(8),
@@ -97,13 +95,15 @@ class JournalCard extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             "${WeekDay(showedDate).short} - ${showedDate.day}",
-            style: const TextStyle(fontSize: 12),
+            style: const TextStyle(fontSize: 16),
             textAlign: TextAlign.center,
           ),
         ),
       );
     }
   }
+
+
     callAddJournalScreen(BuildContext context) {
       Navigator.pushNamed(
         context,
@@ -132,15 +132,4 @@ class JournalCard extends StatelessWidget {
         }
       });
     }
-
   }
-
-
-
-// child: Container(
-// height: 115,
-// alignment: Alignment.center,
-// child: Text(
-// "${WeekDay(showedDate).short} - ${showedDate.day}",
-// style: const TextStyle(fontSize: 16),
-// textAlign: TextAlign.center,

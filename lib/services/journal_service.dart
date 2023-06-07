@@ -5,7 +5,7 @@ import 'package:http_interceptor/http/intercepted_client.dart';
 
 import '../models/journal.dart';
 
-class JournarlService {
+class JournalService {
   static const String url = "http://10.0.0.106:3000/";
   static const String resource = "journals/";
   http.Client client =
@@ -15,7 +15,7 @@ class JournarlService {
     return "$url$resource";
   }
 
-  Uri getUri() {
+  Uri getURI() {
     return Uri.parse(getURL());
   }
 
