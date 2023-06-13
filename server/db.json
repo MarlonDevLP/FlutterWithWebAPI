@@ -1,28 +1,5 @@
 {
   "journals": [
-    {
-      "id": "57d2f100-0562-11ee-9c2a-39fdf9970826",
-      "content": "werrwerwerwewerewrewrwrwer",
-      "created_at": "2023-05-30 18:37:19.209229",
-      "update_at": "2023-05-30 18:37:19.209229"
-    },
-    {
-      "id": "7f00d940-0562-11ee-9c2a-39fdf9970826",
-      "content": "5464536ertertretertterterter",
-      "created_at": "2023-06-07 18:37:19.209229",
-      "update_at": "2023-06-07 18:37:19.209229"
-    },
-    {
-      "id": "526d9360-0566-11ee-b172-21850e64bbea",
-      "content": "dfdfdfdfffdf",
-      "created_at": "2023-05-30 19:05:47.650424",
-      "update_at": "2023-05-30 19:05:47.650424"
-    },
-    {
-      "id": "88c810c0-0566-11ee-a2ed-a1e31597ab3c",
-      "content": "fdsffds",
-      "created_at": "2023-05-31 19:07:19.269253",
-      "update_at": "2023-05-31 19:07:19.269253"
-    }
+    
   ]
 }
